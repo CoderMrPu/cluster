@@ -29,5 +29,3 @@ server {
 }
 "
 echo "$block" > "/etc/nginx/sites-available/$1.conf"
-
-sudo systemctl restart nginx

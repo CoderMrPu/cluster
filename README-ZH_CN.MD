@@ -50,6 +50,9 @@ cd cluster
 - sites （设置apache站点）
   - map （站点域名）
   - to （站点路径）
+  - port （站点端口，需要时配置）
+  - default （是否默认站点，仅最前的第一个站点生效，需要时配置[true]）
+  - alias （站点别名，需要时配置）
 - databases （设置数据库）
   - cluster （创建《cluster》数据库）
 

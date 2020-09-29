@@ -52,6 +52,9 @@ cd cluster
 - sites (Set up the apache site)
   - map (Domain name)
   - to (Site path)
+  - port (Site port, configure when needed)
+  - default (whether the default site, only the first site in the front will take effect, configure when needed[true])
+  - alias (Site alias, configure if needed)
 - databases （set up the database）
   - cluster （create a <cluster> database）
 

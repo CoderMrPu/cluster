@@ -36,6 +36,8 @@ vms:
     sites:
       - map: www.domain1.com
         to: /var/www/html/code/item1_path
+        default: true
+        alias: webpath1
   # VM3
   - type: apache # nginx / apache / database
     name: "cluster-apache2"
@@ -50,6 +52,8 @@ vms:
     sites:
       - map: www.domain2.com
         to: /var/www/html/code/item2_path
+        default: true
+        alias: webpath1/webpath2
   # VM4
   - type: database # nginx / apache / database
     name: "cluster-database"

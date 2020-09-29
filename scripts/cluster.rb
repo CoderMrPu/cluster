@@ -121,6 +121,9 @@ class Cluster
                                 end
 							end
 
+                            machine.vm.provision 'shell' do |s|
+                            	s.inline = "sudo systemctl restart nginx"
+                            end
 						elsif vms['type'] == 'apache'
 							# start apache
 							machine.vm.provision 'shell' do |s|
@@ -133,13 +136,31 @@ class Cluster
 							    machine.vm.provision 'shell' do |s|
                                 	s.path = script_dir + '/features/database.sh'
                                 end
+
+                                # create databases
+                                if vms.has_key?('databases')
+                                	vms['databases'].each do |db|
+                                        machine.vm.provision 'shell' do |s|
+                                            s.name = 'Creating MySQL Database: ' + db
+                                            s.path = script_dir + '/create-mysql.sh'
+                                            s.args = [db]
+                                        end
+                                    end
+                                end
 							end
 
 							machine.vm.provision 'shell' do |s|
                                 s.path = script_dir + '/clear-apache.sh'
                             end
 
+                            site_default = false
 							vms['sites'].each do |site|
+							    default = ''
+							    if site_default == false and site['default'] == true
+							        default = 'true'
+							        site_default = true
+							    end
+
                                 machine.vm.provision 'shell' do |s|
                                     s.name = 'Creating Site: ' + site['map']
 
@@ -149,7 +170,9 @@ class Cluster
                                     s.args = [
                                         site['map'],                # $1
                                         site['to'],                 # $2
-                                        '80',                       # $3
+                                        site['port'] ||= '80',      # $3
+                                        default,                    # $4
+                                        site['alias'] ||= '',       # $5
                                     ]
 
                                     # generate pm2 json config file
@@ -166,6 +189,10 @@ class Cluster
                                     # end
 
                                 end
+                            end
+
+                            machine.vm.provision 'shell' do |s|
+                            	s.inline = "sudo systemctl restart httpd"
                             end
 						elsif vms['type'] == 'database'
 							# start database
