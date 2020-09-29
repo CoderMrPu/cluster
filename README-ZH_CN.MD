@@ -5,7 +5,7 @@
 ### 克隆项目
 
 ```shell
-git clone https://github.com/CoderMrPu/cluster.git
+git clone https://github.com/pucoder/cluster.git
 ```
 
 ### 进入项目

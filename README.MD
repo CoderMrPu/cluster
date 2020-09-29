@@ -7,7 +7,7 @@
 ### Clone the project
 
 ```shell
-git clone https://github.com/CoderMrPu/cluster.git
+git clone https://github.com/pucoder/cluster.git
 ```
 
 ### Enter the project
