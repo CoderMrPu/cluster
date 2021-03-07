@@ -6,8 +6,6 @@ if [[ -f /home/vagrant/.features/nginx ]]; then
     exit 0
 fi
 
-sudo apt-get update -y
-
 sudo touch /home/vagrant/.features/nginx
 sudo chown -Rf vagrant:vagrant /home/vagrant/.features
 

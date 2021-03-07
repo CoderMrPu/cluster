@@ -6,8 +6,6 @@ if [[ -f /home/vagrant/.features/redis5 ]]; then
     exit 0
 fi
 
-sudo apt-get update -y
-
 sudo touch /home/vagrant/.features/redis5
 sudo chown -Rf vagrant:vagrant /home/vagrant/.features
 

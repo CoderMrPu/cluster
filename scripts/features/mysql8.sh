@@ -5,8 +5,6 @@ if [[ -f /home/vagrant/.features/mysql8 ]]; then
     exit 0
 fi
 
-sudo apt-get update -y
-
 sudo touch /home/vagrant/.features/mysql8
 sudo chown -Rf vagrant:vagrant /home/vagrant/.features
 

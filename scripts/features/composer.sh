@@ -6,8 +6,6 @@ if [[ -f /home/vagrant/.features/composer ]]; then
     exit 0
 fi
 
-sudo apt-get update -y
-
 sudo touch /home/vagrant/.features/composer
 sudo chown -Rf vagrant:vagrant /home/vagrant/.features
 

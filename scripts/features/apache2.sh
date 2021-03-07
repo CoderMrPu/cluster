@@ -6,8 +6,6 @@ if [[ -f /home/vagrant/.features/apache2 ]]; then
     exit 0
 fi
 
-sudo apt-get update -y
-
 sudo touch /home/vagrant/.features/apache2
 sudo chown -Rf vagrant:vagrant /home/vagrant/.features
 

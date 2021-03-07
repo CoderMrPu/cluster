@@ -72,6 +72,8 @@ class ClusterShell
                     end
 
                     if vms.has_key?('features')
+                        machine.vm.provision "shell", inline: "sudo apt-get update -y"
+
                         vms['features'].each do |feature|
                             feature_path = script_dir + "/features/" + feature + ".sh"
 
