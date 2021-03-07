@@ -1,30 +1,14 @@
 #!/usr/bin/env bash
 
-# Check If Nginx Has Been Installed
 
-if [ -f /home/vagrant/.homestead-features/nginx ]
-then
-    echo "Nginx already Started."
+if [[ -f /home/vagrant/.features/nginx ]]; then
+    echo "Nginx already installed."
     exit 0
 fi
 
-mkdir -p /home/vagrant/.homestead-features
+sudo apt-get update -y
 
-touch /home/vagrant/.homestead-features/nginx
+sudo touch /home/vagrant/.features/nginx
+sudo chown -Rf vagrant:vagrant /home/vagrant/.features
 
-chown -Rf vagrant:vagrant /home/vagrant/.homestead-features
-
-# Start Nginx
-sudo systemctl enable nginx
-
-sudo systemctl start nginx
-
-echo "Nginx Start complete"
-
-sudo firewall-cmd --permanent --add-service=http
-
-sudo firewall-cmd --permanent --add-service=https
-
-sudo systemctl restart firewalld
-
-echo "firewall Start complete"
+sudo apt-get install nginx -y

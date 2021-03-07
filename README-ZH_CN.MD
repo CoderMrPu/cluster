@@ -17,33 +17,27 @@ cd cluster
 ### 初始化
 
 ```shell
-# Windows
 ./init.bat
-
-# Linux
-./init.sh
 ```
 
 ### 配置Cluster.yaml文件
 
 > 根据自己的需求来配置
+- source（配置虚拟机的软件源，这是全局配置，默认是[mirrors.aliyun.com]）
 
-- type （设置虚拟机类型，nginx或者apache或者database，nginx必须配合apache一起使用，apache和database可以单独使用，apache包含php，database包含MySQL和Redis）
-- alone（独立主机模式，apache类型使用，默认false）
 - name （设置虚拟机的名称，不能重名）
+- ip （网络ip：根据自己虚拟机来配置，不能有冲突）
 - cpus （设置虚拟机cpu数）
 - memory （设置虚拟机内存量）
-- networks （设置虚拟机网络）
-  - type （网络类型：一般默认）
-  - ip （网络ip：根据自己虚拟机来配置，不能有冲突）
 - ports （设置虚拟机端口转发）
-  - send （虚拟机的端口）
-  - to （本地端口）
+  - send （本地端口）
+  - to （虚拟机的端口）
 - proxys （设置nginx代理）
   - map （访问域名）
-  - site（代理站点）
+  - sites（代理站点）
     - send （代理域名）
     - to （代理ip，要求唯一值）
+    - weight （代理权重，默认是1）
 - folders （设置文件夹共享）
   - map （本地文件夹路径）
   - to （虚拟机的路径）
@@ -55,7 +49,9 @@ cd cluster
   - alias （站点别名，需要时配置）
 - databases （设置数据库）
   - cluster （创建《cluster》数据库）
-
+- features （需要安装的功能服务, 目前支持[nginx,apache2,mysql8,redis5,php7.4,composer]）
+  - apache2 （在虚拟机中安装apache2服务）
+  
 ### 启动vagrant
 
 ```shell
@@ -72,7 +68,7 @@ vagrant up
 
 ### 账户信息
 
-- Linux （root：vagrant；vagrant：vagrant）
+- Linux （vagrant：vagrant）
 - MySQL （root：password；cluster：password）
-- Redis （root：“”）
+- Redis （root：“”）由于权限问题，安装redis的时候使用了默认配置，如果需要远程连接redis，请修改redis配置
 

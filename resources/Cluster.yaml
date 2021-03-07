@@ -1,66 +1,77 @@
 ---
-authorize: ~/.ssh/id_rsa.pub
-keys:
-    - ~/.ssh/id_rsa
+#source: https://mirrors.aliyun.com/ubuntu
 vms:
-  # VM1
-  - type: nginx # nginx / apache / database
-    name: "cluster-nginx"
+  - name: nginx
+    active: true
+    ip: "192.168.10.10"
     cpus: 1
-    memory: 256
-    networks:
-      - type: "private_network"
-        ip: "192.168.10.20"
+    memory: 1024
     ports:
       - send: 80
         to: 80
-    proxys:
+    proxys: # nginx use
       - map: www.cluster.com
-        site:
-          - send: www.domain1.com
-            to: 192.168.10.21
-          - send: www.domain2.com
-            to: 192.168.10.22
-  # VM2
-  - type: apache # nginx / apache / database
-    #alone: true # Use as a alone host(Can only be apache)
-    name: "cluster-apache1"
-    cpus: 1
-    memory: 512
-    networks:
-      - type: "private_network"
-        ip: "192.168.10.21"
-    folders:
-      - map: ~/code
-        to: /var/www/html/code
-    sites:
-      - map: www.domain1.com
-        to: /var/www/html/code/item1_path
-        default: true
-        alias: webpath1
-  # VM3
-  - type: apache # nginx / apache / database
-    name: "cluster-apache2"
-    cpus: 1
-    memory: 512
-    networks:
-      - type: "private_network"
-        ip: "192.168.10.22"
-    folders:
-      - map: ~/code
-        to: /var/www/html/code
-    sites:
-      - map: www.domain2.com
-        to: /var/www/html/code/item2_path
-        default: true
-        alias: webpath1/webpath2
-  # VM4
-  - type: database # nginx / apache / database
-    name: "cluster-database"
+        sites:
+          - map: www.domain1.com
+            to: 192.168.10.11
+            weight: 1
+          - map: www.domain2.com
+            to: 192.168.10.12
+            weight: 1
+    features:
+      - nginx
+
+  - name: apache1
+    active: true
+    ip: "192.168.10.11"
     cpus: 1
     memory: 1024
-    networks:
-      - type: "private_network"
-        ip: "192.168.10.25"
+    folders:
+      - map: D:/code
+        to: /home/vagrant/code
+    sites: # apache2 use
+      - map: test1.box
+        to: /home/vagrant/code/test1/public
+        alias: webpath1
+    features:
+      - apache2
+      - php7.4
+      - composer
+
+  - name: apache2
+    active: true
+    ip: "192.168.10.12"
+    cpus: 1
+    memory: 1024
+    folders:
+      - map: D:/code
+        to: /home/vagrant/code
+    sites: # apache2 use
+      - map: test2.box
+        to: /home/vagrant/code/test2/public
+        default: true
+    features:
+      - apache2
+      - php7.4
+      - composer
+
+  - name: database
+    active: true
+    ip: "192.168.10.13"
+    cpus: 1
+    memory: 1024
+    ports:
+      - send: 33060
+        to: 3306
+      - send: 63790
+        to: 6379
     databases:
       - cluster
+    features:
+      - mysql8
+      - redis5
+#    services:
+#      - enabled:
+#          - apache2
+#      - disabled:
+#          - apache2

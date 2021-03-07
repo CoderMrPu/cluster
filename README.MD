@@ -2,7 +2,7 @@
 
 > Note: This version corresponds to v1.0.1 of vagrant box, Problems found during use, welcome issues
 
-[中文文档](https://github.com/CoderMrPu/cluster/blob/master/README-ZH_CN.MD)
+[中文文档](https://github.com/pucoder/cluster/blob/master/README-ZH_CN.MD)
 
 ### Clone the project
 
@@ -19,33 +19,28 @@ cd cluster
 ### Initialization
 
 ```shell
-# Windows
 ./init.bat
-
-# Linux
-./init.sh
 ```
 
 ### Configure the cluster.yaml file
 
 > configure according to your needs
+- source (Configure the software source of the virtual machine, this is a global configuration, the default is [mirrors.aliyun.com])
 
-- type (Set the virtual machine type, nginx or apache or database, nginx must be used together with apache, apache and database can be used separately, apache contains php, database contains MySQL and Redis)
-- alone (alone host mode, apache type used, default false)
 - name (Set the name of the virtual machine, can not be renamed)
+- active (Whether to start the current virtual machine)
+- ip (Network ip: Configure according to your virtual machine, there must be no conflict)
 - cpus (Set the number of virtual machine CPU)
 - memory (Set the amount of virtual machine memory)
-- networks (Set up a virtual machine network)
-  - type (Network type: general default)
-  - ip (Network ip: Configure according to your virtual machine, there must be no conflict)
 - ports (Set up virtual machine port forwarding)
-  - send (Virtual machine port)
-  - to (Local port)
+  - send (Local port)
+  - to (Virtual machine port)
 - proxys (Set up nginx proxy)
   - map (visit domain)
-  - site(proxy site)
+  - sites (proxy site)
     - send (proxy domain name)
     - to (proxy ip,unique value required)
+    - weight (Proxy weight, The default is 1)
 - folders (Set up folder sharing)
   - map (Local folder path)
   - to (The path of the virtual machine)
@@ -55,8 +50,10 @@ cd cluster
   - port (Site port, configure when needed)
   - default (whether the default site, only the first site in the front will take effect, configure when needed[true])
   - alias (Site alias, configure if needed)
-- databases （set up the database）
-  - cluster （create a <cluster> database）
+- databases (set up the database)
+  - cluster (create a <cluster> database)
+- features (The functional service that needs to be installed, currently supports [nginx,apache2,mysql8,redis5,php7.4,composer])
+  - apache2 (Install apache 2 service in the virtual machine)
 
 ### start vagrant
 
@@ -74,6 +71,6 @@ vagrant up
 
 ### account information
 
-- Linux (root:vagrant;vagrant:vagrant)
+- Linux (vagrant:vagrant)
 - MySQL (root:password;cluster:password)
-- Redis (root:"")
+- Redis (root:"")Due to permission issues, the default configuration was used when redis was installed. If you need to connect to redis remotely, please modify the redis configuration
