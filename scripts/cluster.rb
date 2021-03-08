@@ -113,11 +113,11 @@ class ClusterShell
                         	proxy['sites'].each do |site|
                         	    machine.vm.provision 'shell' do |s|
                                    s.path = script_dir + "/hosts-add.sh"
-                                   s.args = [site['to'], site['map']]
+                                   s.args = [site['to'], site['send']]
                                 end
 
                                 weight = site['weight'] ||= "1"
-                                proxys += 'server ' + site['map'] + ' weight=' + weight + ';'
+                                proxys += 'server ' + site['send'] + ' weight=' + weight + ';'
                         	end
 
                             machine.vm.provision 'shell' do |s|

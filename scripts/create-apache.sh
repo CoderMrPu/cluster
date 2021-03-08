@@ -28,7 +28,7 @@ fi
 
 alias=""
 if [[ -n "${12}" ]]; then
-  alias="Alias ${12}  $2"
+  alias="Alias /${12}  $2"
 fi
 
 block="<VirtualHost *:$3>

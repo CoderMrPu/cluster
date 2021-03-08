@@ -25,7 +25,7 @@ cd cluster
 ### Configure the cluster.yaml file
 
 > configure according to your needs
-- source (Configure the software source of the virtual machine, this is a global configuration, the default is [mirrors.aliyun.com])
+- source (Configure the software source of the virtual machine, this is a global configuration, the default is [archive.ubuntu.com])
 
 - name (Set the name of the virtual machine, can not be renamed)
 - active (Whether to start the current virtual machine)
@@ -73,4 +73,4 @@ vagrant up
 
 - Linux (vagrant:vagrant)
 - MySQL (root:password;cluster:password)
-- Redis (root:"")Due to permission issues, the default configuration was used when redis was installed. If you need to connect to redis remotely, please modify the redis configuration
+- Redis (root:"")Due to permission issues, the default configuration was used when redis was installed. If you need to connect to redis remotely, Please modify the configuration of /etc/redis/redis.conf by yourself

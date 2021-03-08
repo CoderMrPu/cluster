@@ -1,5 +1,5 @@
 ---
-#source: https://mirrors.aliyun.com/ubuntu
+#source: mirrors.aliyun.com
 vms:
   - name: nginx
     active: true

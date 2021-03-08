@@ -23,7 +23,7 @@ cd cluster
 ### 配置Cluster.yaml文件
 
 > 根据自己的需求来配置
-- source（配置虚拟机的软件源，这是全局配置，默认是[mirrors.aliyun.com]）
+- source（配置虚拟机的软件源，这是全局配置，默认是[archive.ubuntu.com]）
 
 - name （设置虚拟机的名称，不能重名）
 - ip （网络ip：根据自己虚拟机来配置，不能有冲突）
@@ -70,5 +70,4 @@ vagrant up
 
 - Linux （vagrant：vagrant）
 - MySQL （root：password；cluster：password）
-- Redis （root：“”）由于权限问题，安装redis的时候使用了默认配置，如果需要远程连接redis，请修改redis配置
-
+- Redis （root：“”）由于权限问题，安装redis的时候使用了默认配置，如果需要远程连接redis，请自行修改/etc/redis/redis.conf的配置
