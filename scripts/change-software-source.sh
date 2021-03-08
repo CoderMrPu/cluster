@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [[ "${1}" != "archive.ubuntu.com" ]]; then
+if [[ "${1}" != "mirrors.aliyun.com" ]]; then
   if [[ -f /etc/apt/sources.list.backup ]]; then
     sudo rm -Rf /etc/apt/sources.list
 
@@ -9,5 +9,5 @@ if [[ "${1}" != "archive.ubuntu.com" ]]; then
 
   sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup
 
-  sudo sed -i "s/archive.ubuntu.com/$1/g" /etc/apt/sources.list
+  sudo sed -i "s/mirrors.aliyun.com/$1/g" /etc/apt/sources.list
 fi

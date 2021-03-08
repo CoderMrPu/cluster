@@ -13,7 +13,7 @@ class ClusterShell
             if vms.include? 'name'
                 config.vm.define vms['name'] do |machine|
                     machine.vm.define vms['name'] ||= 'cluster'
-                    machine.vm.box = vms['box'] ||= 'peru/ubuntu-20.04-server-amd64'
+                    machine.vm.box = vms['box'] ||= 'cluster/ubuntu20.04'
                     machine.vm.hostname = vms['name'] ||= 'cluster'
 
                     machine.vm.provider 'virtualbox' do |vb|

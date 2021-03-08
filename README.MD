@@ -25,7 +25,7 @@ cd cluster
 ### Configure the cluster.yaml file
 
 > configure according to your needs
-- source (Configure the software source of the virtual machine, this is a global configuration, the default is [archive.ubuntu.com])
+- source (Configure the software source of the virtual machine, this is a global configuration, the default is [mirrors.aliyun.com])
 
 - name (Set the name of the virtual machine, can not be renamed)
 - active (Whether to start the current virtual machine)
